@@ -1,4 +1,11 @@
-.jumbotron {
-  background-image: url("../assets/images/halftone-yellow.png");
-  background-color: rgb(248,215,121);
+.navbar {
+  background-color: #333333;
+  padding-top: .25rem;
+  padding-bottom: 0;
+
+  .active {
+    .nav-link {
+      color: #CCCCCC;
+    }
+  }
 }
