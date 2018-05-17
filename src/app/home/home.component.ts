@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import * as d3 from "d3";
 
 @Component({
@@ -8,7 +8,7 @@ import * as d3 from "d3";
 })
 export class HomeComponent implements OnInit {
 
-  locations = [];
+  @Output() locationInputEvent = new EventEmitter<string>();
 
   constructor() { }
 
@@ -16,7 +16,11 @@ export class HomeComponent implements OnInit {
   }
 
   receiveNewLocation($event) {
-    this.locations.push($event);
+    this.addLocation($event);
+  }
+
+  addLocation(location) {
+    this.locationInputEvent.emit(location);
   }
 
 }

@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Visual Weather';
+  locations = [];
+
+  receiveNewLocation($event) {
+    this.locations.push($event);
+  }
 }
