@@ -5,12 +5,6 @@
   </div>
 </div>
 <div class="container container-main">
-  <form>
-    <div class="form-group">
-      <label for="locationInput">Location</label>
-      <input type="text" class="form-control" id="locationInput" aria-describedby="locationHelp" placeholder="Enter a location">
-      <small id="locationHelp" class="form-text text-muted">Full address, city, and/or zip code is acceptable</small>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+  <app-add-location (locationInputEvent)="receiveNewLocation($event)"></app-add-location>
+  <p class="location" *ngFor="let location of locations">{{location}}</p>
 </div>

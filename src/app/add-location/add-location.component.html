@@ -1,0 +1,9 @@
+<form>
+  <div class="form-group">
+    <label for="locationInput">Location</label>
+    <input [(ngModel)]="locationText" id="locationInput" type="text" name="location" class="form-control" aria-describedby="locationHelp"
+      placeholder="Enter a location">
+    <small id="locationHelp" class="form-text text-muted">Full address, city, and/or zip code are acceptable inputs</small>
+  </div>
+  <button type="submit" class="btn btn-primary" (click)="addLocation()">Submit</button>
+</form>
