@@ -1,6 +1,7 @@
 import { Component, AfterContentInit } from '@angular/core';
 import alcatraz from '../../assets/testData/alcatraz';
 import * as d3 from 'd3';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-visualization-content',
@@ -13,28 +14,62 @@ export class VisualizationContentComponent implements AfterContentInit {
 
   constructor() { }
 
-  // ngOnInit() {
-  //   console.log(this.weatherData);
+  ngAfterContentInit() {
+
+    this.buildTemperatureGraph();
+  }
+
+  buildTemperatureGraph() {
+    let vis = d3.select("#graph")
+      .append("svg");
+    vis.attr("width", "100%")
+      .attr("height", 500);
+
+    var nodes = this.getHourlyTemperatureData();
+
+    vis.selectAll("circle.nodes")
+      .data(nodes)
+      .enter()
+      .append("svg:circle")
+      .attr("cx", function (d) { return d["x"]; })
+      .attr("cy", function (d) { return d["y"]; })
+      .attr("r", "1px")
+      .attr("fill", "black")
+  }
+
+  getHourlyTemperatureData() {
+    let data = this.weatherData["hourly"].data;
+    console.log(data);
+    let x = data.map(hourData => {
+      return {
+        x: ((hourData.time - 1526670000) / 1000) * 2.5,
+        y: parseInt(hourData.temperature)
+      }
+    });
+    console.log(x);
+    return x;
+  }
+
+
+
+  // radius = 10;
+
+  // ngAfterContentInit() {
+  //   d3.select('p').style('color', 'red');
   // }
 
-  radius = 10;
+  // colorMe() {
+  //   d3.select('button').style('color', 'red');
+  // }
 
-  ngAfterContentInit() {
-    d3.select('p').style('color', 'red');
-  }
-
-  colorMe() {
-    d3.select('button').style('color', 'red');
-  }
-
-  clicked(event: any) {
-    d3.select(event.target).append('circle')
-      .attr('cx', event.x - 85)
-      .attr('cy', event.y - 275)
-      .attr('r', () => {
-        return this.radius;
-      })
-      .attr('fill', 'red');
-  }
+  // clicked(event: any) {
+  //   d3.select(event.target).append('circle')
+  //     .attr('cx', event.x - 100)
+  //     .attr('cy', event.y - 275)
+  //     .attr('r', () => {
+  //       return this.radius;
+  //     })
+  //     .attr('fill', 'red');
+  // }
 
 }
