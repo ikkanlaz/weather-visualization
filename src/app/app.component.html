@@ -2,6 +2,7 @@
   <a class="navbar-brand" routerLink="/">
     <img src="../assets/images/VW Logo.svg" width="45" height="45" class="d-inline-block align-top" alt="">
   </a>
+  <span *ngIf="hasLocation">Visual Weather</span>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
     aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -19,6 +20,4 @@
     </ul>
   </div>
 </nav>
-<!-- <app-home (locationInputEvent)="receiveNewLocation($event)"></app-home> -->
-<!-- <p class="location" *ngFor="let location of locations">{{location}}</p> -->
 <router-outlet></router-outlet>

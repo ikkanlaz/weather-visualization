@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-add-location',
@@ -9,15 +10,18 @@ export class AddLocationComponent implements OnInit {
 
   locationText: string;
 
-  @Output() locationInputEvent = new EventEmitter<string>();
-
-  constructor() { }
+  constructor(private data: DataService) { }
 
   ngOnInit() {
+    this.data.currentLocation.subscribe(location => {
+      console.log(location);
+      this.locationText = location;
+    });
   }
 
   addLocation() {
-    this.locationInputEvent.emit(this.locationText);
+    this.data.addLocation(this.locationText);
+    this.locationText = '';
   }
 
 }

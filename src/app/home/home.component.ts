@@ -1,5 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import * as d3 from "d3";
+import { Router } from '@angular/router';
+import { DataService } from '../data.service';
+import * as d3 from 'd3';
+import { PathLocationStrategy } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -8,19 +11,13 @@ import * as d3 from "d3";
 })
 export class HomeComponent implements OnInit {
 
-  @Output() locationInputEvent = new EventEmitter<string>();
-
-  constructor() { }
+  constructor(private data: DataService, private router: Router) { }
 
   ngOnInit() {
+    this.data.locations.subscribe(locations => {
+      if (locations.length > 0) {
+        this.router.navigate(['/app']);
+      }
+    });
   }
-
-  receiveNewLocation($event) {
-    this.addLocation($event);
-  }
-
-  addLocation(location) {
-    this.locationInputEvent.emit(location);
-  }
-
 }

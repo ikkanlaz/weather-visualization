@@ -1,11 +1,13 @@
 .navbar {
-  background-color: #333333;
   padding-top: .25rem;
   padding-bottom: 0;
 
-  .active {
-    .nav-link {
-      color: #CCCCCC;
-    }
+  span {
+    padding-right: 1rem;
+    padding-left: .5rem;
+    padding-bottom: .25rem;
+    font-family: 'Lemon', cursive;
+    color:#FFFFFF;
+    font-size: 20px;
   }
 }

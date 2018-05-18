@@ -1,5 +1,7 @@
+@import '../../assets/styles/color';
+
 .container-main {
-  background-color: #FFFFFF;
+  background-color: $color-white;
   border-radius: 5px;
   padding: 15px;
 }

@@ -1,3 +1,26 @@
-<p>
-  visualizations works!
-</p>
+<ul class="nav nav-tabs">
+  <li class="nav-item" *ngFor="let location of locations">
+    <a class="nav-link active" href="#">
+      <i class="fas fa-map-marker-alt"></i> {{location}}</a>
+  </li>
+  <li class="nav-item">
+    <button (click)="openNewLocationModal(content)" class="nav-link add-location">
+      <i class="fas fa-plus"></i>
+    </button>
+  </li>
+</ul>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Add New Location</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click');">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-add-location></app-add-location>
+  </div>
+</ng-template>
+
+
+<h3>{{currentLocation}}</h3>
