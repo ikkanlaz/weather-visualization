@@ -9,6 +9,13 @@
     </button>
   </li>
 </ul>
+<nav class="nav nav-pills">
+  <a class="nav-item nav-link active" href="#">Temperature</a>
+  <a class="nav-item nav-link" href="#">Wind</a>
+  <a class="nav-item nav-link" href="#">Precipitaion</a>
+</nav>
+
+<app-visualization-content></app-visualization-content>
 
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
@@ -21,6 +28,3 @@
     <app-add-location></app-add-location>
   </div>
 </ng-template>
-
-
-<h3>{{currentLocation}}</h3>

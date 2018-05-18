@@ -1,6 +1,6 @@
 @import '../../assets/styles/color';
 
-.nav {
+.nav-tabs {
   padding-top: 40px;
   padding-left: 20px;
   background-color: $color-yellow;
@@ -22,9 +22,38 @@
     }
 
     .nav-link.active {
-      background-color: $color-light-grey;
+      background-color: $color-white;
       border: none;
       color: rgb(82, 82, 82);
     }
+
+    .nav-link:focus {
+      outline: none;
+      color: $color-grey;
+    }
+  }
+
+  .nav-item:first-of-type{
+    padding-left: 10%;
+  }
+}
+
+.nav-pills{
+  padding: 20px;
+  background-color: $color-white;
+  line-height: 1.5;
+  font-size: 1.2 rem;
+
+  .nav-item:first-of-type{
+    margin-left: 10%;
+  }
+
+  .nav-link{
+    color: $color-grey;
+  }
+
+  .nav-link.active{
+    background-color: transparent;
+    color: $color-dark-grey;
   }
 }

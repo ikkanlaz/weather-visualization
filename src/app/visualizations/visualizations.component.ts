@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import alcatraz from '../../assets/testData/alcatraz';
-import * as d3 from 'd3';
 
 @Component({
   selector: 'app-visualizations',
@@ -13,7 +11,6 @@ export class VisualizationsComponent implements OnInit {
 
   locations = [];
   currentLocation = '';
-  weatherData: object = alcatraz;
   closeResult: string;
 
   constructor(private data: DataService, private modalService: NgbModal) { }
@@ -22,7 +19,6 @@ export class VisualizationsComponent implements OnInit {
     this.data.locations.subscribe(locations => this.locations = locations);
     this.data.currentLocation.subscribe(location => this.currentLocation = location);
     // this.getWeather();
-    console.log(this.weatherData);
   }
 
   openNewLocationModal(content) {

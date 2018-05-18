@@ -13,6 +13,7 @@ import { AddLocationComponent } from './add-location/add-location.component';
 import { VisualizationsComponent } from './visualizations/visualizations.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AboutComponent } from './about/about.component';
+import { VisualizationContentComponent } from './visualization-content/visualization-content.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { AboutComponent } from './about/about.component';
     AddLocationComponent,
     VisualizationsComponent,
     PageNotFoundComponent,
-    AboutComponent
+    AboutComponent,
+    VisualizationContentComponent
   ],
   imports: [
     BrowserModule,
