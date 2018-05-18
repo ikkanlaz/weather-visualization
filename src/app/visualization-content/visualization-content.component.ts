@@ -43,7 +43,7 @@ export class VisualizationContentComponent implements AfterContentInit {
     let x = data.map(hourData => {
       return {
         x: ((hourData.time - 1526670000) / 1000) * 2.5,
-        y: parseInt(hourData.temperature)
+        y: parseInt(hourData.temperature) * 3
       }
     });
     console.log(x);
