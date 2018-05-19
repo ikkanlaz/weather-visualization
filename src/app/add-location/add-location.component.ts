@@ -9,19 +9,25 @@ import { DataService } from '../data.service';
 export class AddLocationComponent implements OnInit {
 
   locationText: string;
+  locations = [];
 
   constructor(private data: DataService) { }
 
   ngOnInit() {
     this.data.currentLocation.subscribe(location => {
-      console.log(location);
       this.locationText = location;
     });
+    this.data.locations.subscribe(locations => this.locations = locations);
   }
 
   addLocation() {
-    this.data.addLocation(this.locationText);
-    this.locationText = '';
+    let newLocation = this.locationText.trim();
+    if (this.locations.includes(newLocation)) {
+      console.log("already added");
+    } else {
+      this.data.addLocation(newLocation);
+      this.locationText = '';
+    }
   }
 
 }

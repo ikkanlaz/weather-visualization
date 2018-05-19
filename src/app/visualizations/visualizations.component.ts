@@ -18,7 +18,24 @@ export class VisualizationsComponent implements OnInit {
   ngOnInit() {
     this.data.locations.subscribe(locations => this.locations = locations);
     this.data.currentLocation.subscribe(location => this.currentLocation = location);
-    // this.getWeather();
+  }
+
+  getCSSClasses(location: string) {
+    let cssClasses;
+    if (location === this.currentLocation) {
+      cssClasses = {
+        'active': true,
+        'nav-link': true,
+        'location-link': true
+      }
+    } else {
+      cssClasses = {
+        'active': false,
+        'nav-link': true,
+        'location-link': true
+      }
+    }
+    return cssClasses;
   }
 
   openNewLocationModal(content) {
@@ -27,6 +44,10 @@ export class VisualizationsComponent implements OnInit {
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
+  }
+
+  changeCurrentLocation(location) {
+    this.data.changeCurrentLocation(location);
   }
 
   private getDismissReason(reason: any): string {
@@ -38,13 +59,4 @@ export class VisualizationsComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-
-  // getWeather() {
-  //   this.data.getWeatherData().subscribe(
-  //     results => { this.weatherData = results },
-  //     err => console.error(err),
-  //     () => console.log('done loading weather')
-  //   )
-  // }
-
 }

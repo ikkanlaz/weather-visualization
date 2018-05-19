@@ -1,8 +1,11 @@
 @import '../../assets/styles/color';
 
+.nav {
+  padding-left:4em;
+}
+
 .nav-tabs {
   padding-top: 40px;
-  padding-left: 20px;
   background-image: url("../../assets/images/halftone-yellow.png");
   background-color: $color-yellow;
   line-height: 1.5;
@@ -41,21 +44,14 @@
       color: $color-grey;
     }
   }
-
-  .nav-item:first-of-type{
-    padding-left: 10%;
-  }
 }
 
 .nav-pills{
-  padding: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   background-color: $color-white;
   line-height: 1.5;
   font-size: 1.2 rem;
-
-  .nav-item:first-of-type{
-    margin-left: 10%;
-  }
 
   .nav-link{
     color: $color-grey;
