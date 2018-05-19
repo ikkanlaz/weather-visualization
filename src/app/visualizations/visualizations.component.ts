@@ -20,7 +20,7 @@ export class VisualizationsComponent implements OnInit {
     this.data.currentLocation.subscribe(location => this.currentLocation = location);
   }
 
-  getCSSClasses(location: string) {
+  getLocationTabCssClasses(location: string) {
     let cssClasses;
     if (location === this.currentLocation) {
       cssClasses = {

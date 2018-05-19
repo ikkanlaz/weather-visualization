@@ -1,6 +1,6 @@
 <ul class="nav nav-tabs">
   <li class="nav-item location-links" *ngFor="let location of locations">
-    <a [ngClass]="getCSSClasses(location)" (click)="changeCurrentLocation(location)">
+    <a [ngClass]="getLocationTabCssClasses(location)" (click)="changeCurrentLocation(location)">
       <i class="fas fa-map-marker-alt"></i> {{location}}</a>
   </li>
   <li class="nav-item">
