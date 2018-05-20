@@ -4,9 +4,13 @@
   background-color: $color-yellow;
 }
 
-.vis-component{
-  margin-top: 3rem;
-  border-radius: 5px;
-  background-color: $color-white;
-  padding: .25rem;
+
+
+.container {
+  margin-bottom: 3rem;
+
+  .card{
+    margin-top: 3rem;
+    background-color: $color-white;
+  }
 }

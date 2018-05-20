@@ -11,15 +11,16 @@ import * as moment from 'moment';
 export class VisualizationContentComponent implements AfterContentInit {
 
   weatherData: object = alcatraz;
+  dataAge: string;
 
   constructor() { }
 
   ngAfterContentInit() {
-
     this.buildTemperatureGraph();
   }
 
   buildTemperatureGraph() {
+    this.dataAge = moment.unix(this.getTimeDataRetrieved()).fromNow();
     let vis = d3.select("#graph")
       .append("svg");
     vis.attr("width", "100%")
@@ -40,14 +41,18 @@ export class VisualizationContentComponent implements AfterContentInit {
   getHourlyTemperatureData() {
     let data = this.weatherData["hourly"].data;
     console.log(data);
+    let startTime = data[0].time;
     let x = data.map(hourData => {
       return {
-        x: ((hourData.time - 1526670000) / 1000) * 2.5,
+        x: ((hourData.time - startTime) / 1000) * 2.5,
         y: parseInt(hourData.temperature) * 3
       }
     });
-    console.log(x);
     return x;
+  }
+
+  getTimeDataRetrieved() {
+    return this.weatherData["currently"].time;
   }
 
 
