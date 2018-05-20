@@ -10,6 +10,7 @@ export class AddLocationComponent implements OnInit {
 
   locationText: string;
   locations = [];
+  alerts = [];
 
   constructor(private data: DataService) { }
 
@@ -20,10 +21,18 @@ export class AddLocationComponent implements OnInit {
     this.data.locations.subscribe(locations => this.locations = locations);
   }
 
+  addAlert(alertText: string) {
+    this.alerts.push({
+      id: 1,
+      type: 'info',
+      message: alertText,
+    });
+  }
+
   addLocation() {
     let newLocation = this.locationText.trim();
     if (this.locations.includes(newLocation)) {
-      console.log("already added");
+      this.addAlert("Location already added");
     } else {
       this.data.addLocation(newLocation);
       this.locationText = '';

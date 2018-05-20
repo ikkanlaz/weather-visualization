@@ -1,5 +1,6 @@
 <form>
   <div class="form-group">
+    <ngbd-alert-closeable [alerts]="alerts"></ngbd-alert-closeable>
     <label for="locationInput">Location</label>
     <input [(ngModel)]="locationText" id="locationInput" type="text" name="location" class="form-control" aria-describedby="locationHelp"
       placeholder="Enter a location">

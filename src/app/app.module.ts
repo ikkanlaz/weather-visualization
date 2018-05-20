@@ -14,6 +14,7 @@ import { VisualizationsComponent } from './visualizations/visualizations.compone
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AboutComponent } from './about/about.component';
 import { VisualizationContentComponent } from './visualization-content/visualization-content.component';
+import { AlertCloseableComponent } from './alert-closeable/alert-closeable.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { VisualizationContentComponent } from './visualization-content/visualiza
     VisualizationsComponent,
     PageNotFoundComponent,
     AboutComponent,
-    VisualizationContentComponent
+    VisualizationContentComponent,
+    AlertCloseableComponent
   ],
   imports: [
     BrowserModule,
