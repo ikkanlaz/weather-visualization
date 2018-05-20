@@ -15,6 +15,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { AboutComponent } from './about/about.component';
 import { VisualizationContentComponent } from './visualization-content/visualization-content.component';
 import { AlertCloseableComponent } from './alert-closeable/alert-closeable.component';
+import { TemperatureGraphComponent } from './temperature-graph/temperature-graph.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { AlertCloseableComponent } from './alert-closeable/alert-closeable.compo
     PageNotFoundComponent,
     AboutComponent,
     VisualizationContentComponent,
-    AlertCloseableComponent
+    AlertCloseableComponent,
+    TemperatureGraphComponent
   ],
   imports: [
     BrowserModule,
