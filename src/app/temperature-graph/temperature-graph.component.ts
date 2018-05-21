@@ -26,8 +26,8 @@ export class TemperatureGraphComponent implements AfterContentInit {
     let highestTemp = this.getHighestTemp() + 5;
 
     // set the dimensions and margins of the graph
-    let margin = { top: 20, right: 20, bottom: 30, left: 50 },
-      width = 1000 - margin.left - margin.right,
+    let margin = { top: 20, right: 20, bottom: 50, left: 50 },
+      width = 700 - margin.left - margin.right,
       height = 400 - margin.top - margin.bottom;
 
     //set the ranges
@@ -64,9 +64,25 @@ export class TemperatureGraphComponent implements AfterContentInit {
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
 
+    // text label for the x axis
+    svg.append("text")
+      .attr("transform",
+        "translate(" + (width / 2) + " ," +
+        (height + margin.top + 20) + ")")
+      .text("Time");
+
     // Add the Y Axis
     svg.append("g")
       .call(d3.axisLeft(y));
+
+    // text label for the y axis
+    svg.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - margin.left)
+      .attr("x", 0 - (height / 2))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("℉");
   }
 
   getHourlyTemperatureData() {
