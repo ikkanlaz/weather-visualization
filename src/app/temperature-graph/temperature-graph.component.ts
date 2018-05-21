@@ -12,7 +12,6 @@ export class TemperatureGraphComponent implements AfterContentInit {
 
   weatherData: object = alcatraz;
 
-
   constructor() { }
 
   ngAfterContentInit() {
@@ -20,64 +19,54 @@ export class TemperatureGraphComponent implements AfterContentInit {
   }
 
   buildTemperatureGraph() {
-    let width = 800;
-    let height = 400;
     var nodes = this.getHourlyTemperatureData();
-    var links = this.getLinks(nodes);
     let startTime = this.getHourlyDataStartTime();
     let endTime = this.getHourlyDataEndTime();
-    let lowestTemp = this.getLowestTemp() + 5;
+    let lowestTemp = this.getLowestTemp() - 5;
     let highestTemp = this.getHighestTemp() + 5;
 
-    let svg = d3.select("#graph")
-      .append("svg")
-      .attr("width", width)
-      .attr("height", height);
+    // set the dimensions and margins of the graph
+    let margin = { top: 20, right: 20, bottom: 30, left: 50 },
+      width = 1000 - margin.left - margin.right,
+      height = 400 - margin.top - margin.bottom;
 
-    let plotMargins = {
-      top: 30,
-      bottom: 30,
-      left: 80,
-      right: 30
-    };
-    let plotGroup = svg.append('g')
-      .classed('plot', true)
-      .attr('transform', `translate(${plotMargins.left},${plotMargins.top})`);
+    //set the ranges
+    let x = d3.scaleTime().range([0, width]);
+    let y = d3.scaleLinear().range([height, 0]);
 
-    let plotWidth = width - plotMargins.left - plotMargins.right;
-    let plotHeight = height - plotMargins.top - plotMargins.bottom;
+    // define the line
+    let valueline = d3.line()
+      .x(d => x(d["time"]))
+      .y(d => y(d["temp"]));
 
-    let xScale = d3.scaleTime()
-      .domain([startTime, endTime])
-      .nice()
-      .range([0, plotWidth]);
-    let xAxis = d3.axisBottom(xScale);
-    let xAxisGroup = plotGroup.append('g')
-      .classed('x', true)
-      .classed('axis', true)
-      .attr('transform', `translate(${0},${plotHeight})`)
-      .call(xAxis);
+    let svg = d3.select("#graph").append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform",
+        "translate(" + margin.left + "," + margin.top + ")")
 
-    let yScale = d3.scaleLinear()
-      .domain([lowestTemp, highestTemp])
-      .range([plotHeight, 0]);
-    let yAxis = d3.axisLeft(yScale);
-    let yAxisGroup = plotGroup.append('g')
-      .classed('y', true)
-      .classed('axis', true)
-      .call(yAxis);
+    // Scale the range of the data
+    x.domain([startTime, endTime]);
+    y.domain([lowestTemp, highestTemp]);
 
+    // Add the valueline path.
+    svg.append("path")
+      .data([nodes])
+      .attr("class", "line")
+      .attr("d", valueline)
+      .style("fill", "none")
+      .style("stroke", "rgb(248,215,121)")
+      .style("stroke-width", "4px")
 
+    // Add the X Axis
+    svg.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x));
 
-    plotGroup.selectAll(".line")
-      .data(links)
-      .enter()
-      .append("line")
-      .attr("x1", function (d) { return d.source.x })
-      .attr("y1", function (d) { return d.source.y })
-      .attr("x2", function (d) { return d.target.x })
-      .attr("y2", function (d) { return d.target.y })
-      .style("stroke", "rgb(6,120,155)");
+    // Add the Y Axis
+    svg.append("g")
+      .call(d3.axisLeft(y));
   }
 
   getHourlyTemperatureData() {
@@ -86,30 +75,23 @@ export class TemperatureGraphComponent implements AfterContentInit {
     let startTime = data[0].time;
     return data.map(hourData => {
       return {
-        x: ((hourData.time - startTime) / 1000) * 2.5,
-        y: parseInt(hourData.temperature) * 3
+        time: this.parseUnix(hourData.time),
+        temp: hourData.temperature
       }
     });
   }
 
-  getLinks(data) {
-    let links = [];
-    for (let i = 0; i < data.length - 1; i++) {
-      links.push({
-        source: data[i],
-        target: data[i + 1]
-      })
-    }
-    return links;
-  }
-
   getHourlyDataStartTime() {
-    return moment.unix(this.weatherData["hourly"].data[0].time).toDate();
+    return this.parseUnix(this.weatherData["hourly"].data[0].time);
   }
 
   getHourlyDataEndTime() {
     let data = this.weatherData["hourly"].data;
-    return moment.unix(data[data.length - 1].time).toDate();
+    return this.parseUnix(data[data.length - 1].time);
+  }
+
+  parseUnix(unixTime) {
+    return moment.unix(unixTime).toDate();
   }
 
   getLowestTemp() {
