@@ -39,4 +39,4 @@ testem.log
 Thumbs.db
 
 # keys
-/environments/environment.ts
+environments/environment.ts
