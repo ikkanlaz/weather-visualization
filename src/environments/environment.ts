@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  gooleMapsApiKey: "AIzaSyBf2hlBvZEGNsK9IHg-Ba1UndhNjG1lqPI"
+  gooleMapsApiKey: ""
 };
 
 /*
